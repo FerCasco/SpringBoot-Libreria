@@ -44,6 +44,6 @@ INSERT INTO facturas (descripcion, observacion, cliente_id, create_at) VALUES('F
 INSERT INTO factura_items (cantidad, factura_id, producto_id) VALUES(3, 2, 6);
 
 
-
+INSERT INTO libros (nombre, autor, precio, create_at, foto) VALUES('Archivo de tormentas', 'Sanderson', '15', '2017-08-25', '');
 
 
