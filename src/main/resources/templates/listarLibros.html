@@ -29,14 +29,14 @@
 					</thead>
 					<tbody>
 						<tr th:each="libro: ${libros}">
-							<td><a class="btn btn-primary btn-xs" th:href="@{/libros/verLibro/}+${libro.id}" th:text="${libro.id}"</td>
+							<td><a class="btn btn-primary btn-xs" th:href="@{/verLibro/}+${libro.id}" th:text="${libro.id}"></a></td>
 							
 							<td th:text="${libro.nombre}"></td>
 							<td th:text="${libro.autor}"></td>
 							<td th:text="${libro.precio}"></td>
 							<td th:text="${libro.createAt}"></td>
 							<td><a class="btn btn-primary btn-sm"
-								th:href="@{/libros/formLibros/} + ${libro.id}" th:text="'editar'"></a></td>
+								th:href="@{/formLibros/} + ${libro.id}" th:text="'editar'"></a></td>
 							<td><a class="btn btn-danger btn-sm"
 								th:href="@{/eliminar/} + ${libro.id}" th:text="'eliminar'"
 								onclick="return confirm('Est�s seguro que quieres eliminar?');"></a></td>

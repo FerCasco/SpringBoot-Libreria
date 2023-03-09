@@ -20,7 +20,15 @@ public class ItemFactura implements Serializable {
 	private Long id;
 	
 	private Integer cantidad;
-	
+
+	public Libro getLibro() {
+		return libro;
+	}
+
+	public void setLibro(Libro libro) {
+		this.libro = libro;
+	}
+
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="libro_id")
 	private Libro libro;

@@ -21,5 +21,5 @@ public interface ILibroService {
 	public Libro findOne(Long id);
 	
 	public void delete(Long id);
-	
+	public List<Libro> findByNombre(String term);
 }

@@ -3,6 +3,7 @@ package com.bolsadeideas.springboot.app.models.dao;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -19,6 +20,8 @@ public interface ILibroDao extends PagingAndSortingRepository<Libro, Long>{
 
 	void deleteById(Long id);
 
+	@Query("select p from Libro p where p.nombre like %?1%")
+	public List<Libro> findByNombre(String term);
 
 
 

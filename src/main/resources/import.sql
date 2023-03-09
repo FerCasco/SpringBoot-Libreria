@@ -45,5 +45,13 @@ INSERT INTO factura_items (cantidad, factura_id, producto_id) VALUES(3, 2, 6);
 
 
 INSERT INTO libros (nombre, autor, precio, create_at, foto) VALUES('Archivo de tormentas', 'Sanderson', '15', '2017-08-25', '');
-
+INSERT INTO libros (nombre, autor, precio, create_at, foto) VALUES('LOTR la comunidad del anillo', 'Tolkien', '40', '2017-08-25', '');
+INSERT INTO libros (nombre, autor, precio, create_at, foto) VALUES('LOTR las dos torres', 'Tolkien', '45', '2017-08-25', '');
+INSERT INTO libros (nombre, autor, precio, create_at, foto) VALUES('LOTR el retorno del rey', 'Tolkien', '30', '2017-08-25', '');
+INSERT INTO libros (nombre, autor, precio, create_at, foto) VALUES('El camino de los reyes', 'Sanderson', '25', '2017-08-25', '');
+INSERT INTO libros (nombre, autor, precio, create_at, foto) VALUES('El imperio final', 'Sanderson', '43', '2017-08-25', '');
+INSERT INTO libros (nombre, autor, precio, create_at, foto) VALUES('La voz de las espadas', 'Joe Abercrombie', '15', '2017-08-25', '');
+INSERT INTO libros (nombre, autor, precio, create_at, foto) VALUES('Juego de Tronos', 'George RR Martin', '10', '2017-08-25', '');
+INSERT INTO libros (nombre, autor, precio, create_at, foto) VALUES('Choque de Reyes', 'George RR Martin', '10', '2017-08-25', '');
+INSERT INTO libros (nombre, autor, precio, create_at, foto) VALUES('Aprendiz de asesino', 'Robin Hobb', '15', '2017-08-25', '');
 

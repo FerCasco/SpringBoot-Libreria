@@ -13,8 +13,9 @@
 					
 					
 					<img th:if="${#strings.length(libro.foto)>0}" class="img-thumbnail rounded float-left"
-					style="max-width: 25%;" th:src="@{'/uploads/'+${libro.foto}}"
+					style="max-width: 25%;" th:href="@{libro.foto}"
 					th:alt="${libro.foto}"/>
+					<img th:href="${libro.foto}">
 					<ul class="list-group">
 						<li class="list-group-item" th:text="${libro.nombre}"></li>
 						<li class="list-group-item" th:text="${libro.autor}"></li>

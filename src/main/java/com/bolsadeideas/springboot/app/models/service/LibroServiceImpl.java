@@ -18,7 +18,7 @@ public class LibroServiceImpl implements ILibroService {
 
 	@Autowired
 	private ILibroDao libroDao;
-	
+
 	@Override
 	@Transactional(readOnly = true)
 	public List<Libro> findAll() {
@@ -45,6 +45,11 @@ public class LibroServiceImpl implements ILibroService {
 	public void delete(Long id) {
 		libroDao.deleteById(id);
 		
+	}
+
+	@Override
+	public List<Libro> findByNombre(String term) {
+		return libroDao.findByNombre(term);
 	}
 
 	@Override

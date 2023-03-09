@@ -89,7 +89,7 @@ public class LibroController {
 		Pageable pageRequest= PageRequest.of(page,5);
 		Page<Libro> libros= libroService.findAll(pageRequest);
 		
-		PageRender<Libro> pageRender= new PageRender<>("/listar",libros);
+		PageRender<Libro> pageRender= new PageRender<>("/listarLibros",libros);
 		
 		model.addAttribute("titulo", "Listado de libros por página");
 		model.addAttribute("libros", libros);
@@ -115,14 +115,14 @@ public class LibroController {
 			libro = libroService.findOne(id);
 			if (libro == null) {
 				flash.addFlashAttribute("error", "El ID del libro no existe en la BBDD!");
-				return "redirect:/listar";
+				return "redirect:/listarLibros";
 			}
 		} else {
 			flash.addFlashAttribute("error", "El ID del libro no puede ser cero!");
-			return "redirect:/listar";
+			return "redirect:/listarLibros";
 		}
 		model.put("libro", libro);
-		model.put("titulo", "Editar Cliente");
+		model.put("titulo", "Editar Libro");
 		return "formLibros";
 	}
 

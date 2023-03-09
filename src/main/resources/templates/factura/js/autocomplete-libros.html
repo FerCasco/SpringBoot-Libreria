@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<script type="text/javascript" th:fragment="javascript">
+	//CON EL OBJ DOCUMENT SE INVOCA A LA FUNCI�N READY() Y DENTRO DEL READY SE TIENE UNA FUNCI�N. Y DENTRO DE ESTA FUNCTION SE IMPLEMENTA EL "AUTOCOMPLETE"
+	//EL AUTOCOMPLETE EST� ASOCIADO CON EL ID BUSCAR_PRODUCTO DEL FORMULARIO DE LA FACTURA.
+	//A $("#buscar_producto") : SE LE INVOCA EL M�TODO AUTOCOMPLETE.
+	//autocomplete(): RECIBE UN OBJ QUE CONTIENE 2 M�TODOS IMPORTANTES: 
+		//SOURCE : SE ENCARGA DE HACER LA PETICI�N AJAX.
+		//SELECT : SE ENCARGA DE PROCESAR EL RESULTADO Y HACE LO QUE SEA CON LOS DATOS. 
+		
+	//$.AJAX() : IMPLEMENTACI�N DEL M�TODO AJAX. DENTRO DE LOS () SE PASA UN OBJ CON TODOS LOS PAR�MENTROS  Y LA IMPLEMENTACI�N DE M�TODO SUCCESS PARA MANEJAR LA RESPUESTA.  
+		//url: "/factura/cargar-productos/" : MAPPING HACIA METODO HANDLER DE CONTROLADOR. ESTE HANDLER MANEJA LA PETICI�N AJAX Y REALIZA LA CONSULTA A LA BBDD, PARA DEVOLVER LOS PRODUCTOS ENCONTRADOS.
+			//request.term : SE LE AGREGA UN PATH VARIABLE. ESTE PAR�MENTRO CONTIENE EL TEXTO QUE SE ESTA ESCRIBIENDO EN EL  CAMPO DE TEXTO.
+		//dataType: "json" : SE ESPECIFICA EL TIPO DE DATO.
+		//data{} : OPCIONALMENTE, SE PASA EL EL request.term COMO UN PAR�METRO DEL REQUEST. COMO UN REQUESTPARAM.
+		//success: function(data){} : ESTA FUNCI�N RECIBE LOS DATOS EN TIPO JSON Y SE LOS PASA AL AUTOCOMPLETE.  PARA PASARLOS AL AUTOCOMPLETE, SE USA EL RESPONSE.
+			//response($.map()) : DENTRO DEL RESPONSE SE INVOCA AL M�TODO MAP. EL MAP REALIZA UN PROCESO POR CADA ELEMENTO DEL ARREGLO. POR CADA ELEMENTO QUE TENGA EL DATA. 
+				// SE LE PASA EL DATA EN LOS (). EL DATA CONTIENE  CADA ELEMENTO.
+				// SE LE PASA UNA FUNCI�N ANONIMA QUE CONTIENE EL  VALOR DE CADA ELEMENTO.
+				//*** POR LO TANTO map() RETORNAR� EL ID, NOMBRE, PRECIO. 
+	
+	//select: function(event,ui){} : PERMITE REALIZAR CUALQUIER TIPO DE TAREA UNA VEZ QUE SE SELECCIONA UN ELEMENTO DEL AUTOCOMPLETE.
+		//POR AHORA SE TOMA EL NOMBRE DEL PRODUCTO Y MOSTRAR� EN EL CAMPO BUSCAR PRODUCTO.
+			//SE IMPLEMENTA M�TO VAL() DE VALUE,  Y SE LE PASA A LOS () EL VALOR.
+		//DESPUES SE IMPLEMENTAR� CREAR LA L�NEA DE LA FACTURA.
+		
+	
+
+	$(document).ready(function(){
+		
+		$("#buscar_libro").autocomplete({
+		
+				source: function(request,response){
+					$.ajax({
+						url: "/factura/cargar-libro/" + request.term,
+						dataType: "json", 
+						data: {term: request.term},
+						success: function(data){
+							response($.map(data, function(item){
+								return {
+									value: item.id,
+									label: item.nombre,
+									precio: item.precio,
+								};
+							}));
+						},
+					}); 
+				},
+
+				select: function(event, ui){
+    				var linea= $("#plantillaItemsFactura").html();
+
+                    linea = linea.replace(/{ID}/g, ui.item.value);
+                    linea = linea.replace(/{NOMBRE}/g, ui.item.label);
+                    linea = linea.replace(/{PRECIO}/g, ui.item.precio);
+
+                    $("#cargarItemsProductos tbody").append(linea);
+                    itemsHelper.calcularImporte(ui.item.value,ui.item.precio, 1)
+                    return false;
+				}
+			});
+        $("form").submit(function(){
+            $("#plantillaItemsFactura").remove();
+            return;
+        });
+});
+
+    var itemsHelper = {
+        calcularImporte: function(id,precio,cantidad){
+            $("#total_importe_"+ id).html(parseInt(precio) * parseInt(cantidad))
+        }
+    }
+	
+
+</script>
+		
+	
+</body>
+</html>
